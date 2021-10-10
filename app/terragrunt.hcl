@@ -18,6 +18,11 @@ remote_state {
 }
 
 locals {
-  common_vars = merge(yamldecode(file(find_in_parent_folders("account.yaml", "${get_parent_terragrunt_dir()}/empty.yaml"))))
+  common_vars = merge(
+    yamldecode(file(find_in_parent_folders("account.yaml", "${get_parent_terragrunt_dir()}/empty.yaml"))),
+    yamldecode(
+      file(find_in_parent_folders("region.yaml", "${get_parent_terragrunt_dir()}/empty.yaml"))
+    )
+    )
   
 }
